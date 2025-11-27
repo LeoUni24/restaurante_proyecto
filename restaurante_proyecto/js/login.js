@@ -70,3 +70,16 @@ async function login() {
         alert("No se pudo conectar con Strapi. Verifica que el servidor esté encendido en puerto 1337.");
     }
 }
+
+var eye = document.getElementById("eye");
+var input = document.getElementById("contrasena");
+
+eye.addEventListener("click", e=> {
+    if (input.type === "password") {
+        input.type = "text";
+        eye.style.opacity = 1;
+    } else {
+        input.type = "password";
+        eye.style.opacity = 0.2;
+    }
+});

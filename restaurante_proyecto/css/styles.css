@@ -40,12 +40,37 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    margin: 10px;
 }
 
 button:hover {
     background: #555;
 }
 
+.container-password {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 300px;
+    background-color: white;
+    position: relative;
+    box-shadow: 0px 3px;
+}
+.icon {
+    position: absolute;
+    height: 60%;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    opacity: 1;
+    cursor: pointer;
+    
+}
+
+.icon :hover {
+    opacity: 0.8;
+}
 /* ======== DASHBOARD ======== */
 .layout {
     display: flex;

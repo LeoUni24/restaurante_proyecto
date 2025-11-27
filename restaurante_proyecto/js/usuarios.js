@@ -1,7 +1,7 @@
 // Configuración de la API
 // NOTA: Si usas la colección por defecto de Strapi, cambia esto a "/users".
 // Si creaste una colección propia llamada "Usuario", déjalo en "/usuarios".
-const API_URL = "http://localhost:1337/api";
+const API_URL = "https://restaurante-api-bz1t.onrender.com/api";
 const ENDPOINT = "/usuarios"; 
 
 const token = localStorage.getItem("token");

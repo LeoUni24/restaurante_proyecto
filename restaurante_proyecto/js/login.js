@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:1337/api";
+const API_URL = "https://restaurante-api-bz1t.onrender.com/api";
 
 // YA NO NECESITAMOS TOKEN MAESTRO NI STATIC_TOKEN
 // El sistema nativo de Strapi maneja su propia seguridad.

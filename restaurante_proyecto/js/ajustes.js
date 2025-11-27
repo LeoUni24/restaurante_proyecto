@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:1337/api";
+const API_URL = "https://restaurante-api-bz1t.onrender.com/api";
 const token = localStorage.getItem("token");
 
 // Variable para guardar los datos del usuario activo

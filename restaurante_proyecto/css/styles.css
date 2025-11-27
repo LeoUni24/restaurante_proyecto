@@ -133,3 +133,14 @@ th, td {
     padding: 30px;
     border-radius: 10px;
 }
+
+/* ======== NUEVO: SEPARACIÓN DE BOTONES DE REPORTES ======== */
+.reporte-buttons {
+    display: flex;
+    gap: 15px; /* espacio entre botones */
+    flex-wrap: wrap; /* si no caben, bajan ordenado */
+}
+
+.blue-btn {
+    width: auto; /* evita que ocupen todo el ancho */
+}

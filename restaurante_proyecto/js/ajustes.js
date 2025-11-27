@@ -1,128 +1,128 @@
 const API_URL = "https://restaurante-api-bz1t.onrender.com/api";
 const token = localStorage.getItem("token");
 
-// Variable para guardar los datos del usuario activo
+// Variable global
 let currentUser = null;
 
 // =============================
 // INICIALIZACIÓN
 // =============================
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Cargar preferencia de modo oscuro (si existe)
+    // 1. Modo oscuro
     if (localStorage.getItem("darkmode") === "1") {
         document.body.classList.add("dark-mode");
     }
 
-    // 2. Cargar datos del usuario desde el servidor
+    // 2. Cargar datos
     cargarDatosUsuario();
 });
 
-// =================================================
-// 1. OBTENER DATOS DE "ME" (Perfil propio)
-// =================================================
+// =============================
+// 1. CARGAR DATOS
+// =============================
 async function cargarDatosUsuario() {
     if (!token) {
-        alert("No hay sesión activa.");
+        alert("Sesión expirada.");
         location.href = "../index.html";
         return;
     }
 
     try {
-        console.log("📡 Solicitando perfil de usuario...");
+        console.log("📡 Cargando perfil...");
 
-        // Endpoint nativo de Strapi para ver mis propios datos
-        const res = await fetch(`${API_URL}/users/me`, {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
+        // Pedimos datos + el rol (populate=role)
+        const res = await fetch(`${API_URL}/users/me?populate=role`, {
+            headers: { "Authorization": `Bearer ${token}` }
         });
 
         if (!res.ok) {
-            console.error("Token inválido o expirado");
+            console.error("Token vencido");
             localStorage.removeItem("token");
             location.href = "../index.html";
             return;
         }
 
         const data = await res.json();
-        currentUser = data; // Guardamos en memoria global
-        
-        console.log("✅ Datos cargados:", currentUser);
+        currentUser = data; 
+        console.log("✅ Datos:", currentUser);
 
-        // Mostrar en HTML
-        // Strapi nativo usa 'username' y 'email'. 
-        // Si añadiste campos custom como 'nombre' o 'rol', intentamos leerlos también.
+        // --- RENDERIZADO (Solo los campos que existen en tu HTML) ---
+        
+        // 1. Nombre (Si no tienes campo 'nombre' en Strapi, usa username)
         document.getElementById("nombreUsuarioAjustes").innerText = data.nombre || data.username;
+        
+        // 2. Usuario
         document.getElementById("usuarioUsuarioAjustes").innerText = data.username;
-        document.getElementById("emailUsuarioAjustes").innerText = data.email;
-        // Si el rol no viene directo en /users/me (a veces requiere ?populate=role), mostramos un valor por defecto
-        document.getElementById("rolUsuarioAjustes").innerText = data.rol || "Usuario (Rol no visible)";
+        
+        // 3. Rol (Manejo defensivo por si role es null)
+        let rolNombre = "Estándar";
+        if (data.role && data.role.name) {
+            rolNombre = data.role.name;
+        } else if (data.rol) { 
+            // Por si creaste un campo manual llamado 'rol'
+            rolNombre = data.rol;
+        }
+        document.getElementById("rolUsuarioAjustes").innerText = rolNombre;
 
     } catch (error) {
-        console.error("Error cargando perfil:", error);
-        document.getElementById("nombreUsuarioAjustes").innerText = "Error";
+        console.error("Error en perfil:", error);
+        document.getElementById("nombreUsuarioAjustes").innerText = "Error de carga";
     }
 }
 
-// =================================================
+// =============================
 // 2. ACTUALIZAR CONTRASEÑA
-// =================================================
+// =============================
 async function actualizarContrasena() {
     const passActual = document.getElementById("passActual").value;
     const passNueva = document.getElementById("passNueva").value;
     const passRepetir = document.getElementById("passRepetir").value;
 
-    // A. Validaciones básicas
+    // A. Validaciones
     if (!passActual || !passNueva || !passRepetir) {
-        alert("Por favor completa todos los campos.");
+        alert("Completa todos los campos.");
         return;
     }
-
     if (passNueva.length < 6) {
-        alert("La nueva contraseña debe tener al menos 6 caracteres.");
+        alert("Mínimo 6 caracteres.");
         return;
     }
-
     if (passNueva !== passRepetir) {
-        alert("Las contraseñas nuevas no coinciden.");
+        alert("Las contraseñas no coinciden.");
         return;
     }
 
-    // B. VALIDAR CONTRASEÑA ACTUAL
-    // TRUCO DE SEGURIDAD:
-    // Strapi no permite leer la contraseña actual para compararla.
-    // Lo que hacemos es intentar un "Login silencioso" con la contraseña actual.
-    // Si el login funciona, la contraseña es correcta.
+    if (!currentUser || !currentUser.id) {
+        alert("Error: No se ha cargado el ID del usuario. Recarga la página.");
+        return;
+    }
+
+    // B. Verificar contraseña actual (Mini-login)
     try {
-        console.log("🔐 Verificando contraseña actual...");
-        
         const verifyRes = await fetch(`${API_URL}/auth/local`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                identifier: currentUser.email || currentUser.username, 
+                identifier: currentUser.email || currentUser.username,
                 password: passActual
             })
         });
 
         if (!verifyRes.ok) {
-            alert("⛔ La contraseña actual es INCORRECTA.");
-            return; // Detenemos aquí si no coincide
+            alert("⛔ Contraseña actual incorrecta.");
+            return;
         }
-        
-        console.log("✅ Verificación exitosa.");
-
     } catch (error) {
         console.error(error);
-        alert("Error de conexión al verificar contraseña.");
+        alert("Error de conexión.");
         return;
     }
 
-    // C. GUARDAR NUEVA CONTRASEÑA
+    // C. Guardar nueva contraseña (Endpoint Correcto: /users/:id)
     try {
-        console.log("💾 Guardando nueva contraseña...");
-        
-        // Endpoint nativo para actualizar usuario: /api/users/:id
+        console.log(`💾 Guardando en /users/${currentUser.id}...`);
+
+        // Usamos el ID numérico del usuario actual
         const updateRes = await fetch(`${API_URL}/users/${currentUser.id}`, {
             method: "PUT",
             headers: {
@@ -139,24 +139,20 @@ async function actualizarContrasena() {
             throw new Error(errorData.error ? errorData.error.message : "Error desconocido");
         }
 
-        alert("✅ ¡Contraseña actualizada con éxito!");
+        alert("✅ Contraseña cambiada con éxito.");
         
-        // Limpiamos los campos
+        // Limpiar
         document.getElementById("passActual").value = "";
         document.getElementById("passNueva").value = "";
         document.getElementById("passRepetir").value = "";
 
-    } catch (error) {
-        console.error("Error al actualizar:", error);
-        alert("Error al guardar: " + error.message);
+    } catch (err) {
+        console.error(err);
+        if (err.message.includes("Forbidden")) {
+            alert("Error de permisos: Tu rol 'Authenticated' en Strapi necesita permiso 'update' en 'Users-permissions -> User'.");
+        } else {
+            alert("No se pudo guardar: " + err.message);
+        }
     }
 }
 
-// =================================================
-// 3. MODO OSCURO (Funcionalidad básica)
-// =================================================
-function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
-    const estado = document.body.classList.contains("dark-mode") ? "1" : "0";
-    localStorage.setItem("darkmode", estado);
-}

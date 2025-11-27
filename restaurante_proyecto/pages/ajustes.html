@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Ajustes</title>
+
+    <style>
+        .settings-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            max-width: 350px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        /* Modo oscuro */
+        .dark-mode {
+            background: #1f1f1f;
+            color: white;
+        }
+        .dark-mode .settings-box {
+            background: #2b2b2b;
+        }
+        .dark-mode input {
+            background: #333;
+            color: white;
+            border-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<script src="../js/session.js"></script>
+<script>validarSesion();</script>
+
+<div class="layout">
+
+    <div class="sidebar">
+        <header><img src="../img/logo.svg" alt="logo"></header>
+
+        <nav>
+            <a href="dashboard.html">🏠 Inicio</a>
+            <a href="ventas.html">🍽️ Ventas</a>
+            <a href="inventario.html">📦 Inventario</a>
+            <a href="usuarios.html">👥 Gestión de Usuarios</a>
+            <a href="reportes.html">📄 Reportes</a>
+            <a href="ajustes.html">⚙️ Ajustes</a>
+            <a onclick="cerrarSesion()">🚪 Cerrar Sesión</a>
+        </nav>
+    </div>
+
+    <div class="main">
+        <h1 class="title">Ajustes</h1>
+
+        <div style="margin-bottom: 20px;">
+            <p><strong>Nombre:</strong> <span id="nombreUsuarioAjustes"></span></p>
+            <p><strong>Usuario:</strong> <span id="usuarioUsuarioAjustes"></span></p>
+            <p><strong>Rol:</strong> <span id="rolUsuarioAjustes"></span></p>
+        </div>
+
+        <h3>Cambiar contraseña</h3>
+        <div class="settings-box">
+            <div class="form-group">
+                <input id="passActual" type="password" placeholder="Contraseña actual">
+            </div>
+
+            <div class="form-group">
+                <input id="passNueva" type="password" placeholder="Nueva contraseña">
+            </div>
+
+            <div class="form-group">
+                <input id="passRepetir" type="password" placeholder="Repite tu nueva contraseña">
+            </div>
+
+            <button class="blue-btn" onclick="actualizarContrasena()">Actualizar</button>
+        </div>
+
+        <h3 style="margin-top:25px;">Apariencia</h3>
+        <button class="blue-btn" onclick="toggleDarkMode()">Alternar modo oscuro</button>
+
+    </div>
+
+</div>
+
+<script src="../js/ajustes.js"></script>
+
+</body>
+</html>

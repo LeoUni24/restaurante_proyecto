@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Reportes</title>
+</head>
+<body>
+
+<script src="../js/session.js"></script>
+<script>validarSesion();</script>
+
+<div class="layout">
+
+    <div class="sidebar">
+        <header><img src="../img/logo.svg" alt="logo"></header>
+
+        <nav>
+            <a href="dashboard.html">🏠 Inicio</a>
+            <a href="ventas.html">🍽️ Ventas</a>
+            <a href="inventario.html">📦 Inventario</a>
+            <a href="usuarios.html">👥 Gestión de Usuarios</a>
+            <a href="reportes.html">📄 Reportes</a>
+            <a href="ajustes.html">⚙️ Ajustes</a>
+            <a onclick="cerrarSesion()">🚪 Cerrar Sesión</a>
+        </nav>
+    </div>
+
+    <div class="main">
+        <h1 class="title">Reportes</h1>
+
+        <!-- Botones de selección de reporte -->
+        <div style="margin-bottom:20px; ">
+            <button class="blue-btn" onclick="reporteHoy()">Ventas del día</button>
+            <button class="blue-btn" onclick="reporteSemanal()">Reporte semanal</button>
+            <button class="blue-btn" onclick="reporteMensual()">Reporte mensual</button>
+            <button class="blue-btn" onclick="reporteInventario()">Inventario general</button>
+            <button class="blue-btn" onclick="reporteUsuarios()">Usuarios registrados</button>
+        </div>
+
+        <!-- Área donde se mostrarán los reportes -->
+        <div id="contenedorReporte" style="
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 1px 4px rgba(0,0,0,0.1);
+        ">
+            <p>Seleccione un tipo de reporte para visualizar.</p>
+        </div>
+
+        <canvas id="grafico" width="400" height="200" style="margin-top:20px; display:none;"></canvas>
+
+    </div>
+
+</div>
+
+<script src="../js/reportes.js"></script>
+
+</body>
+</html>

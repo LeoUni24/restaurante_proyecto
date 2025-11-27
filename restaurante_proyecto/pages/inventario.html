@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Inventario</title>
+</head>
+<body>
+
+<script src="../js/session.js"></script>
+<script>validarSesion();</script>
+
+<div class="layout">
+
+    <div class="sidebar">
+        <header>
+            <img src="../img/logo.svg" alt="logo">
+        </header>
+
+        <nav>
+            <a href="dashboard.html">🏠 Inicio</a>
+            <a href="ventas.html">🍽️ Ventas</a>
+            <a href="inventario.html">📦 Inventario</a>
+            <a href="usuarios.html">👥 Gestión de Usuarios</a>
+            <a href="reportes.html">📄 Reportes</a>
+            <a href="ajustes.html">⚙️ Ajustes</a>
+            <a onclick="cerrarSesion()">🚪 Cerrar Sesión</a>
+        </nav>
+    </div>
+
+    <div class="main">
+        <h1 class="title">Inventario</h1>
+
+        <button class="blue-btn" style="margin-bottom:20px;" onclick="agregarProducto()">
+            Agregar Producto
+        </button>
+
+        <table>
+       <tr>
+    <th>Ingrediente</th>
+    <th>Cantidad</th>
+    <th>Unidad</th>
+    <th>Precio Unit.</th> <th>Editar</th>
+    <th>Eliminar</th>
+</tr>
+
+            <tbody id="tablaInventario"></tbody>
+        </table>
+
+    </div>
+
+</div>
+
+<script src="../js/inventario.js"></script>
+
+</body>
+</html>

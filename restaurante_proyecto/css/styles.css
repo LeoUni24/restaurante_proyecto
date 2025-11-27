@@ -1,0 +1,135 @@
+/* ======== ESTILOS GENERALES ======== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+.container {
+    width: 350px;
+    margin: 80px auto;
+    background: white;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* ======== LOGIN ======== */
+.login-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #555;
+}
+
+/* ======== DASHBOARD ======== */
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 240px;
+    background: #ffffff;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.sidebar header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar img {
+    width: 90px;
+}
+
+.sidebar nav a {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    text-decoration: none;
+    color: #222;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+}
+
+.sidebar nav a:hover {
+    background: #e8e8e8;
+}
+
+.main {
+    flex-grow: 1;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* ======== TABLAS ======== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+
+.action-btn {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* ======== FORMULARIOS ======== */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.blue-btn {
+    background: #2377ff;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Ajustes */
+.settings-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+}

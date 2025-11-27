@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Ventas</title>
+</head>
+<body>
+
+<script src="../js/session.js"></script>
+<script>validarSesion();</script>
+
+<div class="layout">
+
+    <div class="sidebar">
+        <header>
+            <img src="../img/logo.svg" alt="logo">
+        </header>
+
+        <nav>
+            <a href="dashboard.html">🏠 Inicio</a>
+            <a href="ventas.html">🍽️ Ventas</a>
+            <a href="inventario.html">📦 Inventario</a>
+            <a href="usuarios.html">👥 Gestión de Usuarios</a>
+            <a href="reportes.html">📄 Reportes</a>
+            <a href="ajustes.html">⚙️ Ajustes</a>
+            <a onclick="cerrarSesion()">🚪 Cerrar Sesión</a>
+        </nav>
+    </div>
+
+    <div class="main">
+        <h1 class="title">Ventas</h1>
+
+        <button class="blue-btn" style="margin-bottom:20px;" onclick="nuevaVenta()">Nueva Venta</button>
+
+        <table>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Fecha</th>
+                <th>Acción</th>
+            </tr>
+
+            <tbody id="tablaVentas"></tbody>
+        </table>
+    </div>
+
+</div>
+
+<script src="../js/ventas.js"></script>
+
+</body>
+</html>

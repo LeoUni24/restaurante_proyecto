@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "items_ventas",
+  "info": {
+    "singularName": "items-venta",
+    "pluralName": "items-ventas",
+    "displayName": "ItemsVenta"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "cantidad": {
+      "type": "integer"
+    },
+    "subtotal": {
+      "type": "decimal"
+    }
+  }
+}

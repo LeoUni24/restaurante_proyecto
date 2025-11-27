@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ventas",
+  "info": {
+    "singularName": "venta",
+    "pluralName": "ventas",
+    "displayName": "Venta"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fecha": {
+      "type": "date"
+    },
+    "total": {
+      "type": "decimal"
+    },
+    "cantidad": {
+      "type": "integer"
+    },
+    "estado": {
+      "type": "enumeration",
+      "enum": [
+        "completada",
+        "cancelada"
+      ]
+    },
+    "inventario": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::inventario.inventario"
+    }
+  }
+}

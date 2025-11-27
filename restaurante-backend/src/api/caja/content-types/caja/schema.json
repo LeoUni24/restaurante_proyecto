@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cajas",
+  "info": {
+    "singularName": "caja",
+    "pluralName": "cajas",
+    "displayName": "Caja"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "montoInicial": {
+      "type": "decimal"
+    },
+    "ingresos": {
+      "type": "decimal"
+    },
+    "egresos": {
+      "type": "decimal"
+    },
+    "montoFinal": {
+      "type": "decimal"
+    },
+    "fechaApertura": {
+      "type": "datetime"
+    },
+    "fechaCierre": {
+      "type": "datetime"
+    }
+  }
+}
